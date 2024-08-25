@@ -13,7 +13,7 @@ const initialState: ProjectsState = {
             id: 0,
             name: 'ellm',
             description: 'this is a test project',
-            gitUrl: 'https://github.com/Jef808/ellm',
+            url: 'https://github.com/Jef808/ellm',
             createdAt: '2024-08-23',
             updatedAt: '2024-08-23'
         },
@@ -21,7 +21,7 @@ const initialState: ProjectsState = {
             id: 1,
             name: 'echo-crafter',
             description: 'this is a second test project',
-            gitUrl: 'https://github.com/Jef808/echocrafter',
+            url: 'https://github.com/Jef808/echocrafter',
             createdAt: '2024-08-24',
             updatedAt: '2024-08-24'
         }

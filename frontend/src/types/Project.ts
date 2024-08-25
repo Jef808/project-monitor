@@ -2,7 +2,7 @@ export type Project = {
     id: number;
     name: string;
     description: string;
-    gitUrl: string;
+    url: string;
     createdAt: string;
     updatedAt: string;
 };
