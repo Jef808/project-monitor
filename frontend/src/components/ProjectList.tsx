@@ -1,12 +1,14 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
+    Divider,
     List,
     ListItemButton,
     ListItemText,
     Typography,
     Paper
 } from '@mui/material';
+import axios from 'axios';
 import {RootState} from '../store/rootReducer';
 import {
     fetchProjectsStart,
@@ -23,7 +25,7 @@ const ProjectList: React.FC = () => {
         const fetchProjects = async () => {
             dispatch(fetchProjectsStart());
             try {
-                const response = await fetch('/api/projects');
+                const response = await fetch('http://localhost:3030/projects/');
                 const data: Project[] = await response.json();
                 dispatch(fetchProjectsSuccess(data));
             } catch (err: unknown) {
@@ -34,7 +36,7 @@ const ProjectList: React.FC = () => {
                 }
             }
         };
-        //fetchProjects();
+        fetchProjects();
     }, [dispatch]);
 
     if (loading) {
@@ -48,15 +50,16 @@ const ProjectList: React.FC = () => {
     return (
         <Paper elevation={3}>
             <List>
-                {projects.map((project) => (
-                    <ListItemButton
-                        key={project.id}
-                        to={`projects/${project.id}`}
-                    >
-                        <ListItemText
-                            primary={project.name}
-                            secondary={`Last updated: ${new Date(project.updatedAt).toLocaleDateString()}`} />
-                    </ListItemButton>
+                {projects.map((project, index) => (
+                    <>
+                        {index > 0 && <Divider />}
+                        <ListItemButton key={project._id}>
+                            <ListItemText
+                                primary={project.name}
+                                secondary={`Description: ${project.description}`}
+                                secondary={`Last Updated: ${new Date(project.updatedAt).toLocaleDateString()}`} />
+                        </ListItemButton>
+                    </>
                 ))}
             </List>
         </Paper>

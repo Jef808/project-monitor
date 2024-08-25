@@ -1,6 +1,6 @@
 import {Schema, model} from 'mongoose';
 
-const options = {timestamps: { updatedAt: false }};
+const options = {timestamps: {createdAt: false, updatedAt: false}};
 
 const CommitSchema = new Schema({
     sha: String,
