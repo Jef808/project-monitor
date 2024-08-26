@@ -1,14 +1,19 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
     Divider,
+    IconButton,
     List,
+    ListItem,
     ListItemButton,
     ListItemText,
     Typography,
     Paper
 } from '@mui/material';
-import axios from 'axios';
+import {
+    Delete as DeleteIcon,
+    Edit as EditIcon
+} from '@mui/icons-material';
 import {RootState} from '../store/rootReducer';
 import {
     fetchProjectsStart,
@@ -18,6 +23,7 @@ import {
 import {Project} from '../types/Project';
 
 const ProjectList: React.FC = () => {
+    const [selectedId, setSelectedId] = useState(null as string | null);
     const dispatch = useDispatch();
     const {projects, loading, error} = useSelector((state: RootState) => state.projects);
 
@@ -39,6 +45,13 @@ const ProjectList: React.FC = () => {
         fetchProjects();
     }, [dispatch]);
 
+    const handleProjectClick = (
+        _: React.MouseEvent<HTMLDivElement, MouseEvent>,
+        projectId: string
+    ) => {
+        setSelectedId(projectId);
+    }
+
     if (loading) {
         return <Typography>Loading projects...</Typography>;
     }
@@ -51,15 +64,35 @@ const ProjectList: React.FC = () => {
         <Paper elevation={3}>
             <List>
                 {projects.map((project, index) => (
-                    <>
-                        {index > 0 && <Divider />}
-                        <ListItemButton key={project._id}>
+                    <React.Fragment key={project._id}>
+                    {index > 0 && <Divider component="li" />}
+                    <ListItem
+                        secondaryAction={
+                            <>
+                                <IconButton edge="end" aria-label="edit">
+                                    <EditIcon />
+                                </IconButton>
+                            <IconButton edge="end" aria-label="delete">
+                                <DeleteIcon />
+                            </IconButton>
+                            </>
+                        }
+                        disablePadding
+                    >
+                        <ListItemButton
+                            role={undefined}
+                            selected={selectedId === project._id}
+                            onClick={(event) => handleProjectClick(event, project._id)}
+                            dense>
                             <ListItemText
                                 primary={project.name}
-                                secondary={`Description: ${project.description}`}
                                 secondary={`Last Updated: ${new Date(project.updatedAt).toLocaleDateString()}`} />
+                            {/* <ListItemText
+                                primary={""}
+                                secondary={project.description} /> */}
                         </ListItemButton>
-                    </>
+                    </ListItem>
+                    </React.Fragment>
                 ))}
             </List>
         </Paper>
