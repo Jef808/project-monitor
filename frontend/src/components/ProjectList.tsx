@@ -7,12 +7,14 @@ import {
     ListItem,
     ListItemButton,
     ListItemText,
+    ToolBar,
     Typography,
     Paper
 } from '@mui/material';
 import {
     Delete as DeleteIcon,
-    Edit as EditIcon
+    Edit as EditIcon,
+    Menu as MenuIcon
 } from '@mui/icons-material';
 import {RootState} from '../store/rootReducer';
 import {
@@ -69,12 +71,12 @@ const ProjectList: React.FC = () => {
                     <ListItem
                         secondaryAction={
                             <>
-                                <IconButton edge="end" aria-label="edit">
-                                    <EditIcon />
-                                </IconButton>
-                            <IconButton edge="end" aria-label="delete">
+                              <IconButton edge="end" aria-label="edit">
+                                <EditIcon />
+                              </IconButton>
+                              <IconButton edge="end" aria-label="delete">
                                 <DeleteIcon />
-                            </IconButton>
+                              </IconButton>
                             </>
                         }
                         disablePadding
@@ -99,4 +101,4 @@ const ProjectList: React.FC = () => {
     );
 };
 
-export default ProjectList;
+export default ProjectList

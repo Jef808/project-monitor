@@ -28,6 +28,12 @@ const projectsSlice = createSlice({
         fetchProjectsFailure: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
+        },
+        createProject: (state, action: PayloadAction<Project>) => {
+            state.projects = [
+                ...state.projects,
+                action.payload
+            ];
         }
     }
 });
@@ -35,6 +41,7 @@ const projectsSlice = createSlice({
 export const {
     fetchProjectsStart,
     fetchProjectsSuccess,
-    fetchProjectsFailure
+    fetchProjectsFailure,
+    createProject
 } = projectsSlice.actions;
 export default projectsSlice.reducer;
