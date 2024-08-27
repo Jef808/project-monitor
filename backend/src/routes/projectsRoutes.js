@@ -33,6 +33,7 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         await ProjectModel.deleteOne({_id: req.params.id});
+        res.status(204).send();
     } catch (error) {
         res.status(500).json({message: 'Error deleting project', error});
     }
