@@ -1,8 +1,11 @@
 import type {Project} from '../types/Project';
+import {PROJECT_MONITOR_API_PORT as PORT} from '../config';
+
+const baseUrl = `http://localhost:${PORT}/projects`;
 
 export const makeCreateProjectRequest = async (project: Project) => {
   try {
-    const response = await fetch('http://localhost:3030/projects', {
+    const response = await fetch(baseUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -25,15 +28,16 @@ export const makeCreateProjectRequest = async (project: Project) => {
 };
 
 export const makeDeleteProjectRequest = async (projectId: string) => {
+  const url = `${baseUrl}/${projectId}`;
   try {
-    const response = await fetch(`http://localhost:3030/projects/${projectId}`, {
+    const response = await fetch(url, {
       method: 'DELETE',
     });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
-    console.log('Project deleted successfully');
+    console.log('Project deleted successfully', projectId);
     return response.ok;
 
   } catch (error) {

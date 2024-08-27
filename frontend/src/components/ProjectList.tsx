@@ -103,9 +103,6 @@ const ProjectList: React.FC = () => {
                 <ListItemText
                   primary={project.name}
                   secondary={`Last Updated: ${new Date(project.updatedAt).toLocaleDateString()}`} />
-                {/* <ListItemText
-                      primary={""}
-                      secondary={project.description} /> */}
               </ListItemButton>
             </ListItem>
           </React.Fragment>
