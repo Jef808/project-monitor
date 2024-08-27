@@ -7,14 +7,12 @@ import {
     ListItem,
     ListItemButton,
     ListItemText,
-    ToolBar,
     Typography,
     Paper
 } from '@mui/material';
 import {
     Delete as DeleteIcon,
-    Edit as EditIcon,
-    Menu as MenuIcon
+    Edit as EditIcon
 } from '@mui/icons-material';
 import {RootState} from '../store/rootReducer';
 import {
